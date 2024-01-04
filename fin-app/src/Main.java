@@ -2,9 +2,9 @@
 public class Main {
 
 	public static void main(String[] args) {
-		double debtValue = Double.parseDouble(args[1]);
-		double interestRate = Double.parseDouble(args[2]);
-		int paybackDurationMonths = Integer.parseInt(args[3]);
+		double debtValue = Double.parseDouble(args[0]);
+		double interestRate = Double.parseDouble(args[1]);
+		int paybackDurationMonths = Integer.parseInt(args[2]);
 		
 		//Test
 //		double debtValue = 100000;

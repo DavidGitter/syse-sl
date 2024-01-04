@@ -14,9 +14,9 @@ public class LoanPayBack {
 	
 	@Override
 	public String toString() {
-		return "monthly rate: \t\t" + getMonthlyRate() + " €\n" +
+		return "monthly rate: \t\t" + getMonthlyRate() + " $ \n" +
 			   "number of rates: \t" + getNumberOfRates() + "\n" +
-			   "over all debts: \t" + getOverAllDebt() + " €\n";
+			   "over all debts: \t" + getOverAllDebt() + " $ \n";
 	}
 	
 	public LoanPayBack(double monthlyRate, int numberOfRates, double overAllDebt) {
