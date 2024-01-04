@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Im using a modified version of the https://ant.apache.org/manual/using.html template for my build file -->
+
+<!-- invoking the "dist" task as last element of my build chain -->
+<project name="fin-app" default="dist" basedir=".">
+
+  <description>
+    a simple finance app for the studienleistung of the modul syse
+  </description>
+  <property name="src" location="fin-app/src"/>
+  <property name="build" location="fin-app/build"/>
+  <property name="dist" location="fin-app/dist"/>
+  <property name="bin" location="fin-app/bin"/>
+  <property name="lib" location="fin-app/lib"/>
+
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+	<mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+    <javac srcdir="${src}" destdir="${bin}"/>
+	<javac srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="dist" depends="compile" description="generate the distribution">
+    <mkdir dir="${dist}/lib"/>
+    <jar jarfile="${dist}/lib/fin-app.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean" description="clean up">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+	<delete dir="${bin}"/>
+  </target>
+  
+  <!-- junit ant integration oriented by official template: https://github.com/junit-team/junit5-samples/tree/r5.10.1/junit5-jupiter-starter-ant -->
+  <target name="test.junit.launcher" depends="compile">
+  
+	  <junit printsummary="yes" haltonfailure="yes">
+		<classpath>
+			<path refid="your.classpath.refid" />
+			<fileset dir="${junit.dir}">
+				<include name="**/junit.jar" />
+			</fileset>
+		</classpath>
+		...
+	</junit>
+
+      <junitlauncher haltOnFailure="true" printSummary="true">
+          <classpath refid="test.classpath"/>
+          <testclasses outputdir="build/test-report">
+              <fileset dir="build/tests">
+                  <include name="**/*Tests.class"/>
+				  <include name="**/*Test.class"/>
+              </fileset>
+              <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
+              <listener type="legacy-plain" sendSysOut="true" />
+          </testclasses>
+      </junitlauncher>
+	  
+  </target>
+  
+</project>
