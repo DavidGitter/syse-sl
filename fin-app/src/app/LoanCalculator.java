@@ -1,3 +1,4 @@
+package app;
 
 public class LoanCalculator {
 	public static LoanPayBack calculatePayback

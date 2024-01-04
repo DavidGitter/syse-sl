@@ -1,3 +1,4 @@
+package app;
 
 public class LoanPayBack {
 	public double getMonthlyRate() {
