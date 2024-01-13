@@ -35,8 +35,12 @@
   </target>
 
   <target name="compile" depends="init" description="compile the source">
-    <javac debug="true" srcdir="${src}" destdir="${bin}"/>
-	<javac debug="true" srcdir="${src}" destdir="${build}"/>
+    <javac debug="true" srcdir="${src}" destdir="${bin}">
+		<classpath refid = "junit.classpath"/>
+	</javac>
+	<javac debug="true" srcdir="${src}" destdir="${build}">
+		<classpath refid = "junit.classpath"/>
+	</javac>
 	<jar destfile="${build}/jar/app.jar" basedir="${bin}/app"/>
   </target>
 
@@ -52,13 +56,13 @@
   </target>
   
   <!-- Set up classpath -->
-    <path id="classpath">
+    <!-- <path id="classpath"> -->
         <!-- Add the build directory for compiled classes -->
-        <pathelement location="${bin}"/>
+        <!-- <pathelement location="${bin}"/> -->
 
         <!-- Add JAR files from the lib directory (not used here) -->
         <!-- <fileset dir="${libs}" includes="*.jar"/> -->
-    </path>
+    <!-- </path> -->
 	
 	<path id="pitest.classpath">
 		<pathelement location="${libs}\pitest-entry-1.15.3.jar"/>
@@ -113,6 +117,26 @@
 		<pathelement location="${bin}"/>
 	</path>
 	
+	<path id="junit.classpath">
+		<pathelement location="${libs}\junit\org.junit.jupiter.api_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.migrationsupport_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.params_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.engine_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.launcher_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.runner_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.api_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.engine_1.8.1.v20211028-1957.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.vintage.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.opentest4j_1.2.0.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.apiguardian_1.1.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit_4.13.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+		<pathelement location="${bin}"/>
+	</path>
+	
 	<!-- <taskdef name="pitest" classname="org.pitest.ant.PitestTask" classpathref="pitest.classpath" /> -->
 	
 	<!-- <target name="pit"> -->
@@ -136,8 +160,9 @@
 	<!-- JUnit -->
 	<target name="junit">
         <junit printsummary="yes" haltonfailure="yes">
-            <classpath refid="classpath"/>
+            <classpath refid="junit.classpath"/>
             <formatter type="plain"/>
+			<formatter type="plain" usefile="false" />
             <!-- <batchtest todir="${report}" > -->
                 <!-- <fileset dir="${src.tests}" includes="**/*Test.java"/> -->
             <!-- </batchtest> -->
