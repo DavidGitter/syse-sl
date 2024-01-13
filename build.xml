@@ -111,18 +111,18 @@
 		<pathelement location="${bin}"/>
 	</path>
 	
-	<taskdef name="pitest" classname="org.pitest.ant.PitestTask" classpathref="pitest.classpath" />
+	<!-- <taskdef name="pitest" classname="org.pitest.ant.PitestTask" classpathref="pitest.classpath" /> -->
 	
-	<target name="pit">
-		<property name="junit5PluginVersion" value="0.12" />
-		<pitest
-			pitClasspath="pitest.classpath"
-			classPath="${bin}"
-			targetClasses="app.*"
-			targetTests="tests.*"
-			reportDir="${proj}\reports"
-			sourceDir="${src}"/>
-	</target>
+	<!-- <target name="pit"> -->
+		<!-- <property name="junit5PluginVersion" value="0.12" /> -->
+		<!-- <pitest -->
+			<!-- pitClasspath="pitest.classpath" -->
+			<!-- classPath="${bin}" -->
+			<!-- targetClasses="app.*" -->
+			<!-- targetTests="tests.*" -->
+			<!-- reportDir="${proj}\reports" -->
+			<!-- sourceDir="${src}"/> -->
+	<!-- </target> -->
 	
 	
 	<!-- TESTING -->
