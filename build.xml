@@ -36,10 +36,46 @@
 
   <target name="compile" depends="init" description="compile the source">
     <javac debug="true" srcdir="${src}" destdir="${bin}">
-		<classpath refid = "junit.classpath"/>
+		<classpath>
+			<pathelement location="${libs}\junit\org.junit.jupiter.api_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.engine_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.migrationsupport_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.params_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.commons_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.engine_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.launcher_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.runner_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.api_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.engine_1.8.1.v20211028-1957.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.commons_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.vintage.engine_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.opentest4j_1.2.0.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.apiguardian_1.1.2.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit_4.13.2.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+			<pathelement location="${bin}"/>
+		</classpath>
 	</javac>
 	<javac debug="true" srcdir="${src}" destdir="${build}">
-		<classpath refid = "junit.classpath"/>
+		<classpath>
+			<pathelement location="${libs}\junit\org.junit.jupiter.api_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.engine_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.migrationsupport_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.jupiter.params_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.commons_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.engine_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.launcher_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.runner_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.api_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.engine_1.8.1.v20211028-1957.jar"/>
+			<pathelement location="${libs}\junit\org.junit.platform.suite.commons_1.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit.vintage.engine_5.8.1.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.opentest4j_1.2.0.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.apiguardian_1.1.2.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.junit_4.13.2.v20211018-1956.jar"/>
+			<pathelement location="${libs}\junit\org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+			<pathelement location="${bin}"/>
+		</classpath>
 	</javac>
 	<jar destfile="${build}/jar/app.jar" basedir="${bin}/app"/>
   </target>
