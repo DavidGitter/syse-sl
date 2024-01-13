@@ -25,7 +25,7 @@
 	<antcall target="test" />
   </target>
   
-  <target name="run" depends="dist" />
+  <target name="build" depends="dist" />
   
   <target name="init">
     <tstamp/>
