@@ -186,11 +186,18 @@
 	  </spotbugs>
 	</target>
 	
-	<!-- SCC -->
-	<target name="scc" depends="spotbugs">
-		<exec executable="cmd">
-		  <arg value="/C"/>
-		  <arg value="scc -f html -o ${report}\scc-output.html ${src}"/>
+	<!-- SCC Win -->
+	<!-- <target name="scc" depends="spotbugs"> -->
+		<!-- <exec executable="cmd"> -->
+		  <!-- <arg value="/C"/> -->
+		  <!-- <arg value="scc -f html -o ${report}\scc-output.html ${src}"/> -->
+		<!-- </exec> -->
+	<!-- </target> -->
+	
+	<!-- SCC Linux -->
+	<target name="scc" depends="spotbugs"> -->
+		<exec executable="sh">
+		  <arg value="scc ${src} -f html -o ${report}\scc-output.html ${src}"/>
 		</exec>
 	</target>
   
