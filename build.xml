@@ -8,15 +8,22 @@
   <description>
     a simple finance app for the studienleistung of the modul syse
   </description>
+  <property name="workdir" location="."/>
   <property name="proj" location="FinAppSyse"/>
   <property name="src" location="${proj}/src"/>
   <property name="build" location="${proj}/build"/>
   <property name="dist" location="${proj}/dist"/>
   <property name="bin" location="${proj}/bin"/>
-  <property name="report" location="report"/>
-  <property name="libs" location="f${proj}/libs"/>
+  <property name="report" location="${workdir}/report"/>
+  <property name="libs" location="${proj}/lib"/>
   <property name="src.tests" location="${proj}/src/tests"/>
   <property name="build.tests" location="${proj}/build/tests"/>
+  
+  <target name="run">
+	<antcall target="clean" />
+	<antcall target="build" />
+	<antcall target="test" />
+  </target>
   
   <target name="init">
     <tstamp/>
@@ -26,8 +33,8 @@
   </target>
 
   <target name="compile" depends="init" description="compile the source">
-    <javac srcdir="${src}" destdir="${bin}"/>
-	<javac srcdir="${src}" destdir="${build}"/>
+    <javac debug="true" srcdir="${src}" destdir="${bin}"/>
+	<javac debug="true" srcdir="${src}" destdir="${build}"/>
 	<jar destfile="${build}/jar/app.jar" basedir="${bin}/app"/>
   </target>
 
@@ -50,9 +57,82 @@
         <!-- Add JAR files from the lib directory (not used here) -->
         <!-- <fileset dir="${libs}" includes="*.jar"/> -->
     </path>
-  
-  <target name="test" depends="compile">
-		<echo message="Running tests..."/>
+	
+	<path id="pitest.classpath">
+		<pathelement location="${libs}\pitest-entry-1.15.3.jar"/>
+		<pathelement location="${libs}\pitest-1.15.3.jar"/>
+		<pathelement location="${libs}\pitest-ant-1.15.3.jar"/>
+		<pathelement location="${libs}\pitest-command-line-1.15.3.jar"/>
+		<pathelement location="${libs}\pitest-junit5-plugin-1.2.1.jar"/>
+		
+		<!-- <pathelement location="${libs}\junit4\junit-4.13.2.jar" /> -->
+		<!-- <pathelement location="${libs}\junit4\hamcrest-core-1.3.jar" /> -->
+		
+		<pathelement location="${libs}\junit\org.junit.jupiter.api_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.migrationsupport_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.params_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.engine_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.launcher_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.runner_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.api_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.engine_1.8.1.v20211028-1957.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.vintage.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.opentest4j_1.2.0.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.apiguardian_1.1.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit_4.13.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+	</path>
+	
+	<path id="test.classpath">
+		<pathelement location="${libs}\junit\org.junit.jupiter.api_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.migrationsupport_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.jupiter.params_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.engine_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.launcher_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.runner_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.api_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.engine_1.8.1.v20211028-1957.jar"/>
+		<pathelement location="${libs}\junit\org.junit.platform.suite.commons_1.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit.vintage.engine_5.8.1.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.opentest4j_1.2.0.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.apiguardian_1.1.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.junit_4.13.2.v20211018-1956.jar"/>
+		<pathelement location="${libs}\junit\org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+		
+		<!-- <pathelement location="${libs}\junit4\junit-4.13.2.jar" /> -->
+		<!-- <pathelement location="${libs}\junit4\hamcrest-core-1.3.jar" /> -->
+		
+		<pathelement location="${libs}\pitest-junit5-plugin-1.2.1.jar"/>
+		<pathelement location="${bin}"/>
+	</path>
+	
+	<taskdef name="pitest" classname="org.pitest.ant.PitestTask" classpathref="pitest.classpath" />
+	
+	<target name="pit">
+		<property name="junit5PluginVersion" value="0.12" />
+		<pitest
+			pitClasspath="pitest.classpath"
+			classPath="${bin}"
+			targetClasses="app.*"
+			targetTests="tests.*"
+			reportDir="${proj}\reports"
+			sourceDir="${src}"/>
+	</target>
+	
+	
+	<!-- TESTING -->
+	 <target name="test" depends="scc">
+		<echo message="Testing completed"/>
+		<echo message="Review the spotbugs report under /reports/spotbugs-report.xml"/>
+	</target>
+	
+	<!-- JUnit -->
+	<target name="junit">
         <junit printsummary="yes" haltonfailure="yes">
             <classpath refid="classpath"/>
             <formatter type="plain"/>
@@ -61,6 +141,30 @@
             <!-- </batchtest> -->
 			<test name="tests.LoanCalculatorTest" todir="${report}"/>
         </junit>
-    </target>
+	</target>
+	
+	<!-- SpotBugs -->
+	<taskdef
+    resource="edu/umd/cs/findbugs/anttask/tasks.properties"
+    classpath="${libs}\spotbugs-4.8.3\lib\spotbugs-ant.jar" />
+	
+	<property name="spotbugs.home" value="${libs}\spotbugs-4.8.3" />
+
+	<target name="spotbugs" depends="junit">
+	  <spotbugs home="${spotbugs.home}"
+				output="xml"
+				outputFile="${report}\spotbugs-report.xml">
+		<sourcePath path="${src}" />
+		<class location="${build}\jar\app.jar" />
+	  </spotbugs>
+	</target>
+	
+	<!-- SCC -->
+	<target name="scc" depends="spotbugs">
+		<exec executable="cmd">
+		  <arg value="/C"/>
+		  <arg value="scc -f html -o ${report}\scc-output.html ${src}"/>
+		</exec>
+	</target>
   
 </project>
