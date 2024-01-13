@@ -25,6 +25,8 @@
 	<antcall target="test" />
   </target>
   
+  <target name="run" depends="dist" />
+  
   <target name="init">
     <tstamp/>
     <mkdir dir="${build}"/>
