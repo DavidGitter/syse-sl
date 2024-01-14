@@ -19,10 +19,16 @@
   <property name="src.tests" location="${proj}/src/tests"/>
   <property name="build.tests" location="${proj}/build/tests"/>
   
-  <target name="run">
+  <target name="run-win">
 	<antcall target="clean" />
 	<antcall target="build" />
-	<antcall target="test" />
+	<antcall target="test-win" />
+  </target>
+  
+  <target name="run-lin">
+	<antcall target="clean" />
+	<antcall target="build" />
+	<antcall target="test-lin" />
   </target>
   
   <target name="build" depends="dist" />
