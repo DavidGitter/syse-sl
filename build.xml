@@ -146,13 +146,18 @@
 			<!-- classPath="${bin}" -->
 			<!-- targetClasses="app.*" -->
 			<!-- targetTests="tests.*" -->
-			<!-- reportDir="${proj}\reports" -->
+			<!-- reportDir="${report}" -->
 			<!-- sourceDir="${src}"/> -->
 	<!-- </target> -->
 	
 	
 	<!-- TESTING -->
-	 <target name="test" depends="scc">
+	<target name="test-win" depends="scc-win">
+		<echo message="Testing completed"/>
+		<echo message="Review the spotbugs report under /reports/spotbugs-report.xml"/>
+	</target>
+	
+	<target name="test-lin" depends="scc-lin">
 		<echo message="Testing completed"/>
 		<echo message="Review the spotbugs report under /reports/spotbugs-report.xml"/>
 	</target>
@@ -187,15 +192,15 @@
 	</target>
 	
 	<!-- SCC Win -->
-	<!-- <target name="scc" depends="spotbugs"> -->
-		<!-- <exec executable="cmd"> -->
-		  <!-- <arg value="/C"/> -->
-		  <!-- <arg value="scc -f html -o ${report}\scc-output.html ${src}"/> -->
-		<!-- </exec> -->
-	<!-- </target> -->
+	<target name="scc-win" depends="spotbugs">
+		<exec executable="cmd">
+		  <arg value="/C"/>
+		  <arg value="scc -f html -o ${report}\scc-output.html ${src}"/>
+		</exec>
+	</target>
 	
 	<!-- SCC Linux -->
-	<target name="scc" depends="spotbugs">
+	<target name="scc-lin" depends="spotbugs">
 		<exec executable="sh">
 		  <arg value="scc ${src} -f html -o ${report}\scc-output.html ${src}"/>
 		</exec>
